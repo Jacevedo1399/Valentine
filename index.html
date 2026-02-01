@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valentine 💘</title>
+<title>San Valentín 💘</title>
 
 <style>
 body {
@@ -19,22 +19,22 @@ body {
 
 .card {
   background: white;
-  padding: 30px 25px;
+  padding: 25px;
   border-radius: 25px;
   text-align: center;
   box-shadow: 0 15px 30px rgba(0,0,0,0.25);
-  position: relative;
   width: 90%;
-  max-width: 360px;
+  max-width: 380px;
+  position: relative;
 }
 
 h1 {
   color: #e63946;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .buttons {
-  margin-top: 30px;
+  margin-top: 25px;
   position: relative;
   height: 70px;
 }
@@ -57,24 +57,44 @@ button {
   color: white;
   position: absolute;
   left: 60%;
-  top: 0;
 }
 
-.message, .forever {
+.message, .forever, .reasons {
   display: none;
-  font-size: 18px;
   color: #e63946;
-  line-height: 1.4;
+}
+
+.message {
+  font-size: 20px;
+  margin-top: 20px;
+  font-weight: bold;
 }
 
 .forever {
   font-size: 24px;
   animation: fadeIn 2s ease forwards;
+  margin-top: 25px;
 }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
+}
+
+/* Reasons */
+.reasons {
+  margin-top: 20px;
+  max-height: 260px;
+  overflow-y: auto;
+  padding: 15px;
+  border-radius: 15px;
+  background: #fff0f3;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.08);
+  font-size: 0.95rem;
+}
+
+.reasons h2 {
+  font-size: 1.1rem;
 }
 
 /* Hearts */
@@ -110,88 +130,91 @@ button {
 <body>
 
 <div class="card" id="card">
-  <h1 id="question">Nathaly Blanco,<br>will you be my Valentine? 💖</h1>
+  <h1 id="question">Nathaly Blanco,<br>¿quieres ser mi San Valentín? 💖</h1>
 
   <div class="buttons" id="buttons">
-    <button id="yes">Yes ❤️</button>
+    <button id="yes">Sí ❤️</button>
     <button id="no">No 💔</button>
   </div>
 
   <div class="message" id="message">
-    💕 I knew it 😍<br><br>
-    You make my world brighter just by being in it.<br>
-    Thank you for choosing me today and always.
+    Mis ganas por ti son cada día más grandes ❤️
+  </div>
+
+  <div class="reasons" id="reasons">
+    <h2>💖 100 razones por las que te amo 💖</h2>
+    <ol>
+      <li>Porque tu sonrisa ilumina mis días.</li>
+      <li>Porque me haces sentir en casa.</li>
+      <li>Porque eres auténtica.</li>
+      <li>Porque tu risa es mi sonido favorito.</li>
+      <li>Porque siempre crees en mí.</li>
+      <li>Porque me haces querer ser mejor.</li>
+      <li>Porque tu corazón es enorme.</li>
+      <li>Porque sabes escuchar.</li>
+      <li>Porque me apoyas en todo.</li>
+      <li>Porque confías en mí.</li>
+      <li>Porque me haces sentir amado.</li>
+      <li>Porque eres mi paz.</li>
+      <li>Porque eres mi locura favorita.</li>
+      <li>Porque me entiendes sin palabras.</li>
+      <li>Porque tus abrazos curan todo.</li>
+      <li>Porque eres fuerte.</li>
+      <li>Porque eres dulce.</li>
+      <li>Porque eres hermosa por dentro y por fuera.</li>
+      <li>Porque haces especiales los días normales.</li>
+      <li>Porque contigo todo tiene sentido.</li>
+      <li>Porque eres mi hoy.</li>
+      <li>Porque eres mi mañana.</li>
+      <li>Porque eres mi siempre.</li>
+      <li>Porque te amo.</li>
+    </ol>
   </div>
 
   <div class="forever" id="forever">
-    ✨ Forever starts now ✨<br><br>
+    ✨ Nuestro para siempre empieza ahora ✨<br><br>
     <strong>— Juan Acevedo ❤️</strong>
   </div>
 </div>
 
-<audio id="music" preload="auto">
+<audio id="music">
   <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 const noBtn = document.getElementById("no");
 const yesBtn = document.getElementById("yes");
-const message = document.getElementById("message");
-const forever = document.getElementById("forever");
-const buttons = document.getElementById("buttons");
-const question = document.getElementById("question");
-const music = document.getElementById("music");
 const card = document.getElementById("card");
+const music = document.getElementById("music");
+let hearts;
 
-let heartInterval;
-
-// Move No button (mouse + touch)
-function moveNoButton() {
+function moveNo() {
   const rect = card.getBoundingClientRect();
-  const maxX = rect.width - noBtn.offsetWidth - 10;
-  const maxY = rect.height - noBtn.offsetHeight - 10;
-
-  noBtn.style.left = Math.random() * maxX + "px";
-  noBtn.style.top = Math.random() * maxY + "px";
+  noBtn.style.left = Math.random() * (rect.width - noBtn.offsetWidth) + "px";
+  noBtn.style.top = Math.random() * (rect.height - noBtn.offsetHeight) + "px";
 }
 
-noBtn.addEventListener("mouseover", moveNoButton);
-noBtn.addEventListener("touchstart", moveNoButton);
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("touchstart", moveNo);
 
-// YES ❤️
 yesBtn.addEventListener("click", () => {
-  question.style.display = "none";
-  buttons.style.display = "none";
-  message.style.display = "block";
+  document.getElementById("question").style.display = "none";
+  document.getElementById("buttons").style.display = "none";
+  document.getElementById("message").style.display = "block";
+  document.getElementById("reasons").style.display = "block";
 
   music.currentTime = 0;
-  music.play().catch(() => {});
+  music.play().catch(()=>{});
 
-  startHearts();
-  doubleKiss();
-
-  setTimeout(() => {
-    message.style.display = "none";
-    forever.style.display = "block";
-    clearInterval(heartInterval);
-  }, 4000);
-});
-
-// Hearts
-function startHearts() {
-  heartInterval = setInterval(() => {
+  hearts = setInterval(() => {
     const h = document.createElement("div");
     h.className = "heart";
     h.innerHTML = "❤️";
     h.style.left = Math.random() * 100 + "vw";
-    h.style.fontSize = Math.random() * 20 + 20 + "px";
     document.body.appendChild(h);
     setTimeout(() => h.remove(), 6000);
   }, 300);
-}
 
-// Double kiss 💋💋
-function doubleKiss() {
   for (let i = 0; i < 2; i++) {
     setTimeout(() => {
       const k = document.createElement("div");
@@ -204,7 +227,12 @@ function doubleKiss() {
       setTimeout(() => k.remove(), 2500);
     }, i * 600);
   }
-}
+
+  setTimeout(() => {
+    document.getElementById("forever").style.display = "block";
+    clearInterval(hearts);
+  }, 4000);
+});
 </script>
 
 </body>
