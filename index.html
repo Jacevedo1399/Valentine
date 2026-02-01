@@ -1,264 +1,210 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>San Valentín 💘</title>
+  <meta charset="UTF-8">
+  <title>Nathaly 💘</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body {
-  margin: 0;
-  height: 100vh;
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: Arial, sans-serif;
-  overflow: hidden;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-.card {
-  background: white;
-  padding: 25px;
-  border-radius: 25px;
-  text-align: center;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.25);
-  width: 90%;
-  max-width: 380px;
-  position: relative;
-}
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      text-align: center;
+    }
 
-h1 {
-  color: #e63946;
-  font-size: 1.4rem;
-}
+    .card {
+      background: white;
+      padding: 30px 25px;
+      border-radius: 25px;
+      width: 90%;
+      max-width: 380px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+      animation: pop 0.8s ease;
+      z-index: 10;
+    }
 
-.buttons {
-  margin-top: 25px;
-  position: relative;
-  height: 70px;
-}
+    @keyframes pop {
+      from { transform: scale(0.6); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
 
-button {
-  padding: 14px 26px;
-  font-size: 17px;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
-}
+    h1 {
+      color: #e63946;
+      margin-bottom: 10px;
+    }
 
-#yes {
-  background: #e63946;
-  color: white;
-}
+    p {
+      color: #444;
+      font-size: 17px;
+    }
 
-#no {
-  background: #adb5bd;
-  color: white;
-  position: absolute;
-  left: 60%;
-}
+    button {
+      padding: 14px 28px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 12px;
+      transition: transform 0.2s;
+    }
 
-.message, .forever, .reasons {
-  display: none;
-  color: #e63946;
-}
+    button:active {
+      transform: scale(0.9);
+    }
 
-.message {
-  font-size: 18px;
-  margin-top: 20px;
-  font-weight: bold;
-}
+    #yesBtn {
+      background: #e63946;
+      color: white;
+      box-shadow: 0 5px 15px rgba(230,57,70,0.5);
+    }
 
-.forever {
-  font-size: 24px;
-  animation: fadeIn 2s ease forwards;
-  margin-top: 20px;
-}
+    #noBtn {
+      background: #adb5bd;
+      color: white;
+      position: absolute;
+    }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-}
+    .hidden {
+      display: none;
+    }
 
-/* Reasons */
-.reasons {
-  margin-top: 20px;
-  max-height: 260px;
-  overflow-y: auto;
-  padding: 15px;
-  border-radius: 15px;
-  background: #fff0f3;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.08);
-  font-size: 0.95rem;
-}
+    ul {
+      text-align: left;
+      padding-left: 20px;
+    }
 
-.reasons h2 {
-  font-size: 1.1rem;
-}
+    li {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
 
-/* Hearts */
-.heart {
-  position: fixed;
-  bottom: -10px;
-  font-size: 24px;
-  animation: floatUp 6s linear forwards;
-  pointer-events: none;
-}
+    .secret {
+      margin-top: 20px;
+      font-size: 14px;
+      color: transparent;
+      cursor: pointer;
+    }
 
-@keyframes floatUp {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(-110vh); opacity: 0; }
-}
+    .secret.reveal {
+      color: #6a040f;
+      font-weight: bold;
+      animation: fadeIn 1s ease;
+    }
 
-/* Kiss */
-.kiss {
-  position: fixed;
-  font-size: 60px;
-  animation: kissPop 2.5s ease-out forwards;
-  pointer-events: none;
-}
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
-@keyframes kissPop {
-  0% { transform: scale(0); opacity: 0; }
-  30% { transform: scale(1.2); opacity: 1; }
-  100% { transform: scale(0.8) translateY(-80px); opacity: 0; }
-}
-</style>
+    /* Corazones */
+    .heart {
+      position: absolute;
+      color: rgba(255,255,255,0.8);
+      font-size: 18px;
+      animation: float 6s linear infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+      }
+      10% { opacity: 1; }
+      100% {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="card" id="card">
-  <h1 id="question">Nathaly Blanco,<br>¿quieres ser mi San Valentín? 💖</h1>
+  <!-- Música romántica -->
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5c8d8bb8a1.mp3" type="audio/mpeg">
+  </audio>
 
-  <div class="buttons" id="buttons">
-    <button id="yes">Sí ❤️</button>
-    <button id="no">No 💔</button>
+  <div class="card" id="mainCard">
+    <h1>Nathaly Blanco 💖</h1>
+    <p>¿Quieres ser mi Valentine?</p>
+
+    <button id="yesBtn">SÍ 💘</button>
+    <button id="noBtn">NO 🙃</button>
   </div>
 
-  <div class="message" id="message">
-    💕 Mis ganas por ti son cada día más grandes 💕
+  <div class="card hidden" id="loveCard">
+    <h1>Te amo 💕</h1>
+    <p>Elegirte a ti siempre será mi mejor decisión.</p>
+
+    <ul>
+      <li>Porque tu sonrisa me desarma</li>
+      <li>Porque tu voz me calma</li>
+      <li>Porque contigo el amor se siente real</li>
+      <li>Porque me haces desearte todos los días</li>
+      <li>Porque eres mi lugar favorito</li>
+    </ul>
+
+    <p><strong>Siempre tuyo,</strong><br>Juan Acevedo 💌</p>
+
+    <div class="secret" id="secretMsg">
+      (toca aquí)
+    </div>
   </div>
 
-  <div class="reasons" id="reasons">
-    <h2>💖 100 razones por las que te amo 💖</h2>
-    <ol>
-      <li>Porque tu sonrisa ilumina mis días.</li>
-      <li>Porque me haces sentir en casa.</li>
-      <li>Porque eres auténtica.</li>
-      <li>Porque tu risa es mi sonido favorito.</li>
-      <li>Porque siempre crees en mí.</li>
-      <li>Porque me haces querer ser mejor.</li>
-      <li>Porque tu corazón es enorme.</li>
-      <li>Porque sabes escuchar.</li>
-      <li>Porque me apoyas en todo.</li>
-      <li>Porque confías en mí.</li>
-      <li>Porque me haces sentir amado.</li>
-      <li>Porque eres mi paz.</li>
-      <li>Porque eres mi locura favorita.</li>
-      <li>Porque me entiendes sin palabras.</li>
-      <li>Porque tus abrazos curan todo.</li>
-      <li>Porque eres fuerte.</li>
-      <li>Porque eres dulce.</li>
-      <li>Porque eres hermosa por dentro y por fuera.</li>
-      <li>Porque tu alma es increíble.</li>
-      <li>Porque haces especiales los días normales.</li>
-      <li>Porque confío en ti.</li>
-      <li>Porque contigo soy yo mismo.</li>
-      <li>Porque respetas mis sueños.</li>
-      <li>Porque apoyas mis metas.</li>
-      <li>Porque celebras mis logros.</li>
-      <li>Porque me levantas cuando caigo.</li>
-      <li>Porque eres paciente.</li>
-      <li>Porque eres sincera.</li>
-      <li>Porque me haces reír.</li>
-      <li>Porque tu mirada lo dice todo.</li>
-      <li>Porque haces que amar sea fácil.</li>
-      <li>Porque cuidas de mí.</li>
-      <li>Porque eres detallista.</li>
-      <li>Porque me inspiras.</li>
-      <li>Porque eres valiente.</li>
-      <li>Porque contigo todo es mejor.</li>
-      <li>Porque me haces sentir suficiente.</li>
-      <li>Porque eres única.</li>
-      <li>Porque no te rindes.</li>
-      <li>Porque me haces sentir seguro.</li>
-      <li>Porque tu voz me calma.</li>
-      <li>Porque me aceptas como soy.</li>
-      <li>Porque me motivas.</li>
-      <li>Porque compartes tu mundo conmigo.</li>
-      <li>Porque eres mi mejor amiga.</li>
-      <li>Porque eres mi amor.</li>
-      <li>Porque contigo todo tiene sentido.</li>
-      <li>Porque eres mi siempre.</li>
-      <li>Porque te amo.</li>
-    </ol>
-  </div>
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const mainCard = document.getElementById("mainCard");
+    const loveCard = document.getElementById("loveCard");
+    const secretMsg = document.getElementById("secretMsg");
 
-  <div class="forever" id="forever">
-    ✨ Nuestro para siempre empieza ahora ✨<br><br>
-    <strong>— Juan Acevedo ❤️</strong>
-  </div>
-</div>
+    noBtn.addEventListener("mouseover", moveNo);
+    noBtn.addEventListener("touchstart", moveNo);
 
-<audio id="music">
-  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
-</audio>
+    function moveNo() {
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 60);
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    }
 
-<script>
-const noBtn = document.getElementById("no");
-const yesBtn = document.getElementById("yes");
-const card = document.getElementById("card");
-const music = document.getElementById("music");
-let hearts;
+    yesBtn.addEventListener("click", () => {
+      mainCard.classList.add("hidden");
+      loveCard.classList.remove("hidden");
+    });
 
-function moveNo() {
-  const rect = card.getBoundingClientRect();
-  noBtn.style.left = Math.random() * (rect.width - noBtn.offsetWidth) + "px";
-  noBtn.style.top = Math.random() * (rect.height - noBtn.offsetHeight) + "px";
-}
+    secretMsg.addEventListener("click", () => {
+      secretMsg.textContent = "Mis ganas de hacerte mía aumentan cada día más 🔥❤️";
+      secretMsg.classList.add("reveal");
+    });
 
-noBtn.addEventListener("mouseover", moveNo);
-noBtn.addEventListener("touchstart", moveNo);
+    // Crear corazones flotando
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.textContent = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 10 + 15 + "px";
+      document.body.appendChild(heart);
 
-yesBtn.addEventListener("click", () => {
-  document.getElementById("question").style.display = "none";
-  document.getElementById("buttons").style.display = "none";
-  document.getElementById("message").style.display = "block";
-  document.getElementById("reasons").style.display = "block";
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
 
-  music.currentTime = 0;
-  music.play().catch(()=>{});
-
-  hearts = setInterval(() => {
-    const h = document.createElement("div");
-    h.className = "heart";
-    h.innerHTML = "❤️";
-    h.style.left = Math.random() * 100 + "vw";
-    document.body.appendChild(h);
-    setTimeout(() => h.remove(), 6000);
-  }, 300);
-
-  for (let i = 0; i < 2; i++) {
-    setTimeout(() => {
-      const k = document.createElement("div");
-      k.className = "kiss";
-      k.innerHTML = "💋";
-      k.style.left = "50%";
-      k.style.top = "50%";
-      k.style.transform = "translate(-50%, -50%)";
-      document.body.appendChild(k);
-      setTimeout(() => k.remove(), 2500);
-    }, i * 600);
-  }
-
-  setTimeout(() => {
-    document.getElementById("forever").style.display = "block";
-    clearInterval(hearts);
-  }, 4000);
-});
-</script>
+    setInterval(createHeart, 300);
+  </script>
 
 </body>
 </html>
