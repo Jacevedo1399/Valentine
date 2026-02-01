@@ -1,222 +1,193 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>Nathaly 💘</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-body {
-  margin:0;
-  height:100vh;
-  font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,#ff758c,#ff7eb3);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  text-align:center;
-  transition:background 2s;
-}
-
-body.dark {
-  background:radial-gradient(circle,#3a0f1e,#000);
-}
-
-.card {
-  background:white;
-  padding:30px 25px;
-  border-radius:25px;
-  width:90%;
-  max-width:390px;
-  box-shadow:0 15px 35px rgba(0,0,0,.3);
-  animation:pop .8s ease;
-  z-index:10;
-}
-
-@keyframes pop {
-  from{transform:scale(.6);opacity:0}
-  to{transform:scale(1);opacity:1}
-}
-
-h1,h3{color:#e63946}
-
-button{
-  padding:14px 28px;
-  font-size:18px;
-  border:none;
-  border-radius:30px;
-  cursor:pointer;
-  margin:12px;
-}
-
-#yesBtn{
-  background:#e63946;
-  color:white;
-}
-
-#noBtn{
-  background:#adb5bd;
-  color:white;
-  position:absolute;
-}
-
-.hidden{display:none}
-
-ul{text-align:left;padding-left:20px}
-li{margin-bottom:10px}
-
-.secret{
-  margin-top:20px;
-  font-size:15px;
-  color:transparent;
-}
-
-.secret.reveal{
-  color:#ffccd5;
-  animation:fadeIn 1.5s ease;
-}
-
-@keyframes fadeIn{
-  from{opacity:0}
-  to{opacity:1}
-}
-
-/* corazones */
-.heart{
-  position:absolute;
-  color:rgba(255,255,255,.8);
-  animation:float 6s linear infinite;
-}
-
-@keyframes float{
-  0%{transform:translateY(100vh);opacity:0}
-  10%{opacity:1}
-  100%{transform:translateY(-10vh);opacity:0}
-}
-
-/* corazón final */
-.big-heart{
-  font-size:80px;
-  animation:beat 1s infinite;
-}
-
-@keyframes beat{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.2)}
-}
-
-/* beso */
-.kiss{
-  font-size:40px;
-  animation:kiss 1.5s ease infinite;
-}
-
-@keyframes kiss{
-  0%{opacity:0;transform:scale(.5)}
-  50%{opacity:1;transform:scale(1.2)}
-  100%{opacity:0;transform:scale(.5)}
-}
-</style>
-</head>
-
-<body>
-
-<audio id="music" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5c8d8bb8a1.mp3">
-</audio>
-
-<!-- PREGUNTA -->
-<div class="card" id="mainCard">
-  <h1>Nathaly Blanco 💖</h1>
-  <p>¿Quieres ser mi Valentine?</p>
-  <button id="yesBtn">SÍ 💘</button>
-  <button id="noBtn">NO 🙃</button>
-</div>
-
-<!-- DESPUÉS DEL SÍ -->
-<div class="card hidden" id="loveCard">
-  <h1>💖 Dijo que SÍ 💖</h1>
-
-  <p>
-    Nathaly…<br>
-    llegaste sin avisar y te volviste todo.
-  </p>
-
-  <p>
-    Mi calma, mi deseo,<br>
-    mi pensamiento antes de dormir.
-  </p>
-
-  <h3>Razones por las que te amo:</h3>
-  <ul>
-    <li>Porque tu sonrisa me desarma</li>
-    <li>Porque tu voz me tranquiliza</li>
-    <li>Porque contigo todo es real</li>
-    <li>Porque me haces imaginar un futuro</li>
-    <li>Porque eres mi lugar favorito</li>
-  </ul>
-
-  <p><strong>Con todo lo que soy,</strong><br>Juan Acevedo 💌</p>
-
-  <button id="finalBtn" style="background:#ff758c;color:white;">
-    Tengo algo más para ti…
-  </button>
-
-  <div class="secret hidden" id="secretMsg">
-    <div class="big-heart">❤️</div>
-    <p>
-      Mis ganas de hacerte mía aumentan cada día más 🔥<br><br>
-      Esta noche… quiero que seas mi último pensamiento 🌙
-    </p>
-    <div class="kiss">💋</div>
-    <p><strong>Ahora deja el teléfono… y ven conmigo 😏</strong></p>
-  </div>
-</div>
-
-<script>
-const noBtn=document.getElementById("noBtn");
-const yesBtn=document.getElementById("yesBtn");
-const mainCard=document.getElementById("mainCard");
-const loveCard=document.getElementById("loveCard");
-const finalBtn=document.getElementById("finalBtn");
-const secretMsg=document.getElementById("secretMsg");
-const music=document.getElementById("music");
-
-function moveNo(){
-  const x=Math.random()*(window.innerWidth-120);
-  const y=Math.random()*(window.innerHeight-60);
-  noBtn.style.left=x+"px";
-  noBtn.style.top=y+"px";
-}
-noBtn.addEventListener("mouseover",moveNo);
-noBtn.addEventListener("touchstart",moveNo);
-
-yesBtn.addEventListener("click",()=>{
-  music.play();
-  mainCard.classList.add("hidden");
-  loveCard.classList.remove("hidden");
-});
-
-finalBtn.addEventListener("click",()=>{
-  document.body.classList.add("dark");
-  finalBtn.classList.add("hidden");
-  secretMsg.classList.remove("hidden");
-  secretMsg.classList.add("reveal");
-  if(navigator.vibrate){navigator.vibrate([300,150,300]);}
-});
-
-function createHeart(){
-  const h=document.createElement("div");
-  h.className="heart";
-  h.textContent="❤️";
-  h.style.left=Math.random()*100+"vw";
-  h.style.fontSize=Math.random()*12+14+"px";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),6000);
-}
-setInterval(createHeart,300);
-</script>
-
-</body>
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<title>Valentine 💘</title>  
+  
+<style>  
+body {  
+  margin: 0;  
+  height: 100vh;  
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  font-family: 'Arial', sans-serif;  
+  overflow: hidden;  
+}  
+  
+.card {  
+  background: white;  
+  padding: 40px;  
+  border-radius: 25px;  
+  text-align: center;  
+  box-shadow: 0 15px 30px rgba(0,0,0,0.25);  
+  position: relative;  
+  width: 360px;  
+}  
+  
+h1 {  
+  color: #e63946;  
+}  
+  
+.buttons {  
+  margin-top: 30px;  
+}  
+  
+button {  
+  padding: 15px 30px;  
+  font-size: 18px;  
+  border-radius: 30px;  
+  border: none;  
+  cursor: pointer;  
+}  
+  
+#yes {  
+  background: #e63946;  
+  color: white;  
+  margin-right: 15px;  
+}  
+  
+#no {  
+  background: #adb5bd;  
+  color: white;  
+  position: absolute;  
+}  
+  
+.message, .forever {  
+  display: none;  
+  font-size: 20px;  
+  color: #e63946;  
+  line-height: 1.4;  
+}  
+  
+/* Hearts */  
+.heart {  
+  position: fixed;  
+  bottom: -10px;  
+  font-size: 24px;  
+  animation: floatUp 6s linear forwards;  
+}  
+  
+@keyframes floatUp {  
+  0% { transform: translateY(0); opacity: 1; }  
+  100% { transform: translateY(-110vh); opacity: 0; }  
+}  
+  
+/* Kiss */  
+.kiss {  
+  position: fixed;  
+  font-size: 60px;  
+  animation: kissPop 2.5s ease-out forwards;  
+  pointer-events: none;  
+}  
+  
+@keyframes kissPop {  
+  0% { transform: scale(0); opacity: 0; }  
+  30% { transform: scale(1.2); opacity: 1; }  
+  100% { transform: scale(0.8) translateY(-80px); opacity: 0; }  
+}  
+  
+/* Forever screen */  
+.forever {  
+  font-size: 26px;  
+  animation: fadeIn 2s ease forwards;  
+}  
+  
+@keyframes fadeIn {  
+  from { opacity: 0; }  
+  to { opacity: 1; }  
+}  
+</style>  
+</head>  
+  
+<body>  
+  
+<div class="card" id="card">  
+  <h1 id="question">Nathaly Blanco,<br>will you be my Valentine? 💖</h1>  
+  
+  <div class="buttons" id="buttons">  
+    <button id="yes">Yes ❤️</button>  
+    <button id="no">No 💔</button>  
+  </div>  
+  
+  <div class="message" id="message">  
+    💕 I knew it 😍<br><br>  
+    You make my world brighter just by being in it.<br>  
+    Thank you for choosing me today and always.  
+  </div>  
+  
+  <div class="forever" id="forever">  
+    ✨ Forever starts now ✨<br><br>  
+    <strong>— Juan Acevedo ❤️</strong>  
+  </div>  
+</div>  
+  
+<audio id="music">  
+  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">  
+</audio>  
+  
+<script>  
+const noBtn = document.getElementById("no");  
+const yesBtn = document.getElementById("yes");  
+const message = document.getElementById("message");  
+const forever = document.getElementById("forever");  
+const buttons = document.getElementById("buttons");  
+const question = document.getElementById("question");  
+const music = document.getElementById("music");  
+const card = document.getElementById("card");  
+  
+// No button escape 😈  
+noBtn.addEventListener("mouseover", () => {  
+  const rect = card.getBoundingClientRect();  
+  noBtn.style.left = Math.random() * (rect.width - noBtn.offsetWidth) + "px";  
+  noBtn.style.top = Math.random() * (rect.height - noBtn.offsetHeight) + "px";  
+});  
+  
+// YES ❤️  
+yesBtn.addEventListener("click", () => {  
+  question.style.display = "none";  
+  buttons.style.display = "none";  
+  message.style.display = "block";  
+  music.play();  
+  startHearts();  
+  doubleKiss();  
+  
+  setTimeout(() => {  
+    message.style.display = "none";  
+    forever.style.display = "block";  
+  }, 4000);  
+});  
+  
+// Hearts  
+function startHearts() {  
+  setInterval(() => {  
+    const h = document.createElement("div");  
+    h.className = "heart";  
+    h.innerHTML = "❤️";  
+    h.style.left = Math.random() * 100 + "vw";  
+    h.style.fontSize = Math.random() * 20 + 20 + "px";  
+    document.body.appendChild(h);  
+    setTimeout(() => h.remove(), 6000);  
+  }, 300);  
+}  
+  
+// Double kiss 💋💋  
+function doubleKiss() {  
+  for (let i = 0; i < 2; i++) {  
+    setTimeout(() => {  
+      const k = document.createElement("div");  
+      k.className = "kiss";  
+      k.innerHTML = "💋";  
+      k.style.left = "50%";  
+      k.style.top = "50%";  
+      k.style.transform = "translate(-50%, -50%)";  
+      document.body.appendChild(k);  
+      setTimeout(() => k.remove(), 2500);  
+    }, i * 600);  
+  }  
+}  
+</script>  
+  
+</body>  
 </html>
